@@ -31,3 +31,27 @@ services:
       PAPERLESS_DBPASS: ${POSTGRES_PASSWORD}
     networks:
       - reverse-proxy
+    deploy:
+      labels:
+        ## Proxy
+        - traefik.enable=true
+        - traefik.http.routers.paperless.rule=Host(`paperless.lan`)
+        - traefik.http.routers.paperless.entrypoints=websecure
+        - traefik.http.routers.paperless.service=paperless
+        - traefik.http.routers.paperless.tls=true
+        - traefik.http.services.paperless.loadbalancer.server.port=8000
+        - traefik.http.routers.paperless.middlewares=middlewares-authentik@file
+        ## Homepage
+          #Service
+        - homepage.group=Productivity
+        - homepage.name=Paperless
+        - homepage.description=Document management
+        - homepage.icon=paperlessngx.png
+        - homepage.server=my-docker
+        - homepage.container=paperless_ngx
+        - homepage.href=http://192.168.2.3:8000
+          #Widget
+        - homepage.widget.type=paperlessngx
+        - homepage.widget.url=http://192.168.2.3:8000
+        - homepage.widget.username=${PAPERLESS_ADMIN_USER}
+        - homepage.widget.password=${PAPERLESS_ADMIN_PASSWORD}
