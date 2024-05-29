@@ -1,0 +1,33 @@
+version: "3.9"
+
+networks:
+  reverse-proxy:
+    external: true
+
+services:
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    ports:
+      - 8000:8000
+    volumes:
+      - /mnt/user/docker/volumes/paperless:/usr/src/paperless/data
+      - /mnt/user/vault/documents:/usr/src/paperless/media
+      - /mnt/user/vault/exports:/usr/src/paperless/export
+      - /mnt/user/scan:/usr/src/paperless/consume
+    environment:
+      USERMAP_UID: 99
+      USERMAP_GID: 100
+      PAPERLESS_ADMIN_USER: ${PAPERLESS_ADMIN_USER}
+      PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD}
+      ## Cache
+      PAPERLESS_REDIS: redis://unraid.lan:6379
+      PAPERLESS_REDIS_PREFIX: paperless
+      ## Database
+      PAPERLESS_DBENGINE: postgresql
+      PAPERLESS_DBHOST: unraid.lan #e.g. 192.168.2.2
+      PAPERLESS_DBPORT: 5432
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: ${POSTGRES_USER}
+      PAPERLESS_DBPASS: ${POSTGRES_PASSWORD}
+    networks:
+      - reverse-proxy
