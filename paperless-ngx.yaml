@@ -6,7 +6,7 @@ networks:
 
 services:
   paperless:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.8.6
     ports:
       - 8000:8000
     volumes:
@@ -25,7 +25,7 @@ services:
       ## Database
       PAPERLESS_DBENGINE: postgresql
       PAPERLESS_DBHOST: unraid.lan #e.g. 192.168.2.2
-      PAPERLESS_DBPORT: 5432
+      PAPERLESS_DBPORT: ${POSTGRES_PORT}
       PAPERLESS_DBNAME: paperless
       PAPERLESS_DBUSER: ${POSTGRES_USER}
       PAPERLESS_DBPASS: ${POSTGRES_PASSWORD}
