@@ -5,7 +5,7 @@ networks:
     external: true
 
 services:
-  paperless:
+  ngx:
     image: ghcr.io/paperless-ngx/paperless-ngx:2.8.6
     ports:
       - 8000:8000
