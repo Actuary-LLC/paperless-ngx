@@ -12,7 +12,7 @@ jobs:
       PAPERLESS_ADMIN_USER: ${{ vars.PAPERLESS_ADMIN_USER }}
       PAPERLESS_ADMIN_PASSWORD: ${{ secrets.PAPERLESS_ADMIN_PASSWORD }}
       POSTGRES_USER: ${{ vars.POSTGRES_USER }}
-      POSTGRES_PASS: ${{ secretsPOSTGRES_PASSWORD }}
+      POSTGRES_PASS: ${{ secrets.POSTGRES_PASSWORD }}
       POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
     steps:
       - name: Checkout
