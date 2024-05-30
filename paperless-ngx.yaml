@@ -47,7 +47,7 @@ services:
         - homepage.group=Productivity
         - homepage.name=Paperless
         - homepage.description=Document management
-        - homepage.icon=paperlessngx.png
+        #- homepage.icon=paperlessngx.png
         - homepage.server=my-docker
         - homepage.container=paperless_ngx
         - homepage.href=http://192.168.2.3:8000
