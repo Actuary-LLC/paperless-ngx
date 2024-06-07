@@ -56,3 +56,5 @@ services:
         - homepage.widget.url=http://192.168.2.3:8000
         - homepage.widget.username=${PAPERLESS_ADMIN_USER}
         - homepage.widget.password=${PAPERLESS_ADMIN_PASSWORD}
+        ## DIUN
+        - diun.enable=true
