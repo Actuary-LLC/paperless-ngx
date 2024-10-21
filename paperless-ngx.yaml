@@ -41,7 +41,7 @@ services:
         - traefik.http.routers.paperless.service=paperless
         - traefik.http.routers.paperless.tls=true
         - traefik.http.services.paperless.loadbalancer.server.port=8000
-        - traefik.http.routers.paperless.middlewares=middlewares-authentik@file
+        - traefik.http.routers.paperless.middlewares=authentik@file
         ## Homepage
           #Service
         - homepage.group=Productivity
