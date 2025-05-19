@@ -6,7 +6,7 @@ networks:
 
 services:
   ngx:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.15.3
     ports:
       - 8000:8000
     volumes:
