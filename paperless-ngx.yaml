@@ -21,11 +21,11 @@ services:
       PAPERLESS_ADMIN_USER: ${PAPERLESS_ADMIN_USER}
       PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD}
       ## Cache
-      PAPERLESS_REDIS: redis://unraid.lan:6379
+      PAPERLESS_REDIS: redis://192.168.2.2:6379
       PAPERLESS_REDIS_PREFIX: paperless
       ## Database
       PAPERLESS_DBENGINE: postgresql
-      PAPERLESS_DBHOST: unraid.lan #e.g. 192.168.2.2
+      PAPERLESS_DBHOST: 192.168.2.2 
       PAPERLESS_DBPORT: ${POSTGRES_PORT}
       PAPERLESS_DBNAME: paperless
       PAPERLESS_DBUSER: ${POSTGRES_USER}
@@ -34,14 +34,6 @@ services:
       - reverse-proxy
     deploy:
       labels:
-        ## Proxy
-        - traefik.enable=true
-        - traefik.http.routers.paperless.rule=Host(`paperless.lan`)
-        - traefik.http.routers.paperless.entrypoints=websecure
-        - traefik.http.routers.paperless.service=paperless
-        - traefik.http.routers.paperless.tls=true
-        - traefik.http.services.paperless.loadbalancer.server.port=8000
-        - traefik.http.routers.paperless.middlewares=authentik@file
         ## Homepage
           #Service
         - homepage.group=Productivity
