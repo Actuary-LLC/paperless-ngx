@@ -16,7 +16,7 @@ jobs:
       POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Run a container command
         run: |
           docker stack deploy -c paperless-ngx.yaml paperless
