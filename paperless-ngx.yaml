@@ -11,6 +11,12 @@ services:
     # https://paperless.actuary.dev) and from other containers over the overlay
     # network (http://paperless_ngx:8000).
     ports: []
+    # The image's built-in HEALTHCHECK (curl http://localhost:8000, interval 30s,
+    # 5 retries, NO start_period) marks slow starts as unhealthy and Swarm
+    # SIGKILLs the task (exit 137), causing a silent ~3-minute restart loop.
+    # Disabled until webserver startup is verified stable.
+    healthcheck:
+      disable: true
     volumes:
       - /mnt/user/docker/volumes/paperless:/usr/src/paperless/data
       - /mnt/user/vault/documents:/usr/src/paperless/media
