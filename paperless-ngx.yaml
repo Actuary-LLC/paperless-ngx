@@ -7,6 +7,12 @@ networks:
 services:
   ngx:
     image: ghcr.io/paperless-ngx/paperless-ngx:3.4.2
+    # Run as Unraid nobody:users (99:100) directly. The image ships 1000:1000;
+    # USERMAP_UID remapping runs `usermod` at startup which re-owns the entire
+    # /usr/src/paperless home tree (app + venv + bind mounts) via overlay
+    # copy-ups and NFS walks - it never completed, so no service ever started.
+    # As non-root, the entrypoint skips the UID/GID remap entirely.
+    user: "99:100"
     # No published ports (hardening): access via traefik (paperless.lan /
     # https://paperless.actuary.dev) and from other containers over the overlay
     # network (http://paperless_ngx:8000).
