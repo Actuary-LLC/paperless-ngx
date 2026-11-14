@@ -7,8 +7,10 @@ networks:
 services:
   ngx:
     image: ghcr.io/paperless-ngx/paperless-ngx:3.4.2
-    ports:
-      - 8000:8000
+    # No published ports (hardening): access via traefik (paperless.lan /
+    # https://paperless.actuary.dev) and from other containers over the overlay
+    # network (http://paperless_ngx:8000).
+    ports: []
     volumes:
       - /mnt/user/docker/volumes/paperless:/usr/src/paperless/data
       - /mnt/user/vault/documents:/usr/src/paperless/media
