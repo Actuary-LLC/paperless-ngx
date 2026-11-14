@@ -37,6 +37,15 @@ services:
       - reverse-proxy
     deploy:
       labels:
+        ## Proxy
+        - traefik.enable=true
+        - traefik.http.routers.paperless.rule=Host(`paperless.actuary.dev`)
+        - traefik.http.routers.paperless.entrypoints=websecure
+        - traefik.http.routers.paperless.service=paperless
+        - traefik.http.routers.paperless.tls=true
+        - traefik.http.routers.paperless.tls.certresolver=myresolver
+        - traefik.http.services.paperless.loadbalancer.server.port=8000
+        - traefik.http.routers.paperless.middlewares=lan-only@file,authentik@file
         ## Homepage
           #Service
         - homepage.group=Productivity
